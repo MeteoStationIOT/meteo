@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<meta charset="UTF-8"/>
+    	<title id> meteo station </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <!-- Barre de navigation -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Station Météo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/exterieur">Météo extérieure</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--Code concernant les différentes mesures et relevés -->
+        <div class="row">
+    	   <h1 id="title"> Recupération des données de température du jardin </h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="fist_line">Température extérieure</th>
+                    <th class="fist_line">Pression atmosphérique</th>
+                    <th class="fist_line">Taux d'humidité</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fist_line" id="temperature_value"></td>
+                    <td class="fist_line" id="pression_value"></td>
+                    <td class="fist_line" id="humidity_value"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Accéléromètre X</th>
+                    <th>Accéléromètre Y</th>
+                    <th>Accéléromètre Z</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="xCoor"></td>
+                    <td id="yCoor"></td>
+                    <td id="zCoor"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row conseil_meteo" >
+            <div class="col-md-6" id="image">
+
+            </div>
+
+            <div class="col-md-6" id="conseil_text">
+                <h4 id="conseil_content">
+                </h4>
+            </div>
+        </div>
+        <div class="row alert_text">
+                <h1 id="content_alert"></h1>
+        </div>
+
+        <!-- On indique les types de script que l'on va utiliser -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+        <!-- On écrit le script -->
+        <script>
+        	/* 
+        	On déclenche la connection au serveur sur le port 8080 et en local.
+        	*/
+        	var socket = io.connect('http://localhost:8080');
+
+            /* 
+            On receptionne les différentes données envoyées par le serveur */
+            socket.on('temperature', function(temperature){
+                console.log(temperature); 
+                document.getElementById('temperature_value').textContent = Number(temperature).toFixed(2).toString() + "°C"; 
+            });
+
+            socket.on('pression', function(pression){
+                console.log(pression); 
+                document.getElementById('pression_value').textContent = Number(pression).toFixed(2).toString() + " Pa";
+            });
+
+            socket.on('humidity', function(humidity){
+                console.log(humidity); 
+                document.getElementById('humidity_value').textContent = Number(humidity).toFixed(2).toString() + " %";
+            });
+
+            /* Le serveur a envoyé coté client du json */
+            socket.on('accelerometer', function(accelerometer){
+                /*Le json récupéré est transmé en string pour voir si il contient les clés que l'on veut.*/
+                var string = accelerometer.toString(); 
+                if (string.includes('x') == true && string.includes('y') == true && string.includes('z') == true){
+                    /* On désérialise le json, et on extrait les valeurs qui nous interessent*/
+                    var jsObject = JSON.parse(accelerometer);
+                    var x = jsObject.x.toString();
+                    var y = jsObject.y.toString();
+                    var z = jsObject.z.toString();
+
+                    /* Et on remplace les champs par les valeurs correspondantes.*/
+                    document.getElementById('xCoor').textContent = x; 
+                    document.getElementById('yCoor').textContent = y; 
+                    document.getElementById('zCoor').textContent = z;
+
+                    if((x != 0) || (y != 0) || (z != 1)){
+                        document.getElementById('content_alert').textContent = "ALERTE TREMBLEMENT DE TERRE ! CACHEZ VOUS SOUS UNE TABLE OU UNE CHAISE AFIN D'EVITER LA CHUTE D'OBJET CHEZ VOUS !";
+                    }
+                    else{
+                        document.getElementById('content_alert').textContent = "";
+                    }
+
+                }
+            });
+        </script>
+    </body>
+</html>
+
+<style>
+    #title, th, #temperature_value, #pression_value, #humidity_value, #xCoor, #yCoor, #zCoor{
+        text-align : center;
+    }
+
+    #conseil{
+        text-align : center;
+        position : absolute;
+        left : 32%;
+        top: 40%;
+    }
+
+    .conseil_meteo{
+        position: absolute;
+        top: 50%;
+    }
+
+    .alert_text{
+        text-align: center;
+        position: absolute;
+        top: 80%;
+    }
+
+    #conseil_text{
+        position: relative;
+        left : 80%;
+    }
+    #conseil_content{
+        position : relative;
+        left : 80%;
+    }
+
+</style>
