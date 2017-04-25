@@ -11,3 +11,9 @@ TODO:
 4. Installer Jeedom sur la 3eme Raspberry
 5. Récupérer les url des Requetes pour les scripts de scénario
 6. C'est parti !
+
+##Swagger
+
+Python Flask -
+
+https://app.swaggerhub.com/apis/MrSqueezeR/Flask_Meteo/1.0.0 
