@@ -9,8 +9,9 @@ TODO:
 2. Lancer le script Python ( python mainFlask.py ) sur la Raspberry qui servira d'afficheur
 3. Lancer le script Python ( python meteo.py) sur la Raspberry qui enverra les données
 4. Installer Jeedom sur la 3eme Raspberry
-5. Récupérer les url des Requetes pour les scripts de scénario
-6. C'est parti !
+5. Pour utiliser le site web, télécharger le dossier subscriber et exécuter ( node app.js ) le serveur Node
+6. Récupérer les url des Requetes pour les scripts de scénario
+7. C'est parti !
 
 ## Swagger
 
