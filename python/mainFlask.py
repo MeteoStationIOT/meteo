@@ -45,15 +45,18 @@ O,O,O,O,O,O,O,O,
 O,O,O,O,O,O,O,O
 ]
 
+
+A = (0,0,255)
+
 goutte = [
-O,O,O,X,X,O,O,O,
-O,O,O,X,X,O,O,O,
-O,O,X,X,X,X,O,O,
-O,X,X,X,X,X,X,O,
-O,X,X,X,X,X,X,O,
-O,O,X,X,X,X,O,O,
-O,O,X,X,X,X,O,O,
-O,O,O,X,X,O,O,O
+O,O,O,A,A,O,O,O,
+O,O,O,A,A,O,O,O,
+O,O,A,A,A,A,O,O,
+O,A,A,A,A,A,A,O,
+O,A,A,A,A,A,A,O,
+O,A,A,A,A,A,A,O,
+O,A,A,A,A,A,A,O,
+O,O,A,A,A,A,O,O
 
 ]
 
