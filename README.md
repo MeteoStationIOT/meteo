@@ -1,6 +1,5 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Station Meteo IoT}
+
+# Station Meteo IoT
 TODO: Créer une station météo en utilisant des Raspberry Pi
 ## Installation
 TODO: Télécharger simplement ou clonez le projet git
@@ -12,6 +11,3 @@ TODO:
 4. Installer Jeedom sur la 3eme Raspberry
 5. Récupérer les url des Requetes pour les scripts de scénario
 6. C'est parti !
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
