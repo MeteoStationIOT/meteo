@@ -14,6 +14,12 @@ TODO:
 
 ## Swagger
 
-Python Flask -
+#### Python Flask
 
 https://app.swaggerhub.com/apis/MrSqueezeR/Flask_Meteo/1.0.0 
+
+#### MQTT
+
+Lien limité au groupe IMERIR, en format YAML ( Swagger ne prenant pas en compte MQTT )
+
+https://drive.google.com/open?id=0B--_WVACz5IpY2kyTWVuV1FVQU0
