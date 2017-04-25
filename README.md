@@ -20,6 +20,6 @@ https://app.swaggerhub.com/apis/MrSqueezeR/Flask_Meteo/1.0.0
 
 #### MQTT
 
-Lien limité au groupe IMERIR, en format YAML ( Swagger ne prenant pas en compte MQTT )
+Swagger ne prend pas en compte MQTT, il est normal donc que dans le Scheme on ait https
 
-https://drive.google.com/open?id=0B--_WVACz5IpY2kyTWVuV1FVQU0
+https://app.swaggerhub.com/apis/jpetitfils/meteoStation/1.0.0
